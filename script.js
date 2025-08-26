@@ -54,7 +54,11 @@ Object.keys(stations).forEach(stationId => {
 });
 
 // --- 7. INITIALIZE JEEP ICON ---
-let jeepIcon = null;
+const jeepIcon = L.icon({
+    iconUrl: 'images/jeep.png',
+    iconSize:     [40, 40], // The size of the icon in pixels [width, height]
+    iconAnchor:   [20, 20], // The point of the icon which will correspond to marker's location
+});
 
 // --- 8. LISTEN FOR REAL-TIME JEEP UPDATES ---
 const jeepRef = doc(db, 'jeeps', 'jeep_1');
