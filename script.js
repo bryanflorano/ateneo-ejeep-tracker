@@ -53,12 +53,14 @@ Object.keys(stations).forEach(stationId => {
     });
 });
 
-// --- 7. INITIALIZE JEEP ICON ---
-const jeepIcon = L.icon({
+// --- 7. DEFINE AND INITIALIZE THE CUSTOM JEEP ICON ---
+const customJeepIcon = L.icon({
     iconUrl: 'images/jeep.png',
     iconSize:     [40, 40], // The size of the icon in pixels [width, height]
     iconAnchor:   [20, 20], // The point of the icon which will correspond to marker's location
 });
+
+let jeepIcon = null;
 
 // --- 8. LISTEN FOR REAL-TIME JEEP UPDATES ---
 const jeepRef = doc(db, 'jeeps', 'jeep_1');
@@ -80,7 +82,7 @@ onSnapshot(jeepRef, (doc) => {
     const jeepCoords = stations[stationId].coords;
 
     if (!jeepIcon) {
-        jeepIcon = L.marker(jeepCoords).addTo(map);
+        jeepIcon = L.marker(jeepCoords, { icon: customJeepIcon }).addTo(map);
     } else {
         jeepIcon.setLatLng(jeepCoords);
     }
